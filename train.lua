@@ -32,7 +32,7 @@ cmd:option('-optim', 'adagrad', [[Optimization method. Possible options are:
                               sgd (vanilla SGD), adagrad, adadelta, adam]])
 cmd:option('-learning_rate', 0.05, [[Starting learning rate. If adagrad/adadelta/adam is used, 
                                 then this is the global learning rate.]])
-cmd:option('-pre_word_vecs', 'glove.hdf5', [[If a valid path is specified, then this will load 
+cmd:option('-pre_word_vecs', 'data/glove.hdf5', [[If a valid path is specified, then this will load
                                       pretrained word embeddings (hdf5 file)]])
 cmd:option('-fix_word_vecs', 1, [[If = 1, fix word embeddings]])
 cmd:option('-max_batch_l', '', [[If blank, then it will infer the max batch size from the

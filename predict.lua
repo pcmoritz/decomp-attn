@@ -48,6 +48,7 @@ function sent2wordidx(sent, word2idx, start_symbol)
       local idx = word2idx[word] or UNK 
       table.insert(t, idx)
    end
+   print(t)
    return torch.LongTensor(t)
 end
 
@@ -112,10 +113,21 @@ function main()
      local sent1_l = sent1[i]:size(1)
      local sent2_l = sent2[i]:size(1)
      local word_vecs1 = word_vecs_enc1:forward(sent1[i]:view(1, sent1_l))
+     -- print("word vectors")
+     -- print(word_vecs1)
      local word_vecs2 = word_vecs_enc2:forward(sent2[i]:view(1, sent2_l))
+     -- print(word_vecs2)
      set_size_encoder(1, sent1_l, sent2_l, model_opt.word_vec_size,
 		      model_opt.hidden_size, all_layers)
      local pred = sent_encoder:forward({word_vecs1, word_vecs2})
+
+     -- for i = 1, #sent_encoder.modules do
+     --  print("XXX module" .. i)
+     --  print(sent_encoder.modules[i].output)
+     -- end
+
+     print('VAL:')
+     print(pred)
      local _, pred_argmax = pred:max(2)
      local label_str = idx2label[pred_argmax[1][1]]
      print('PRED: ' .. label_str)
